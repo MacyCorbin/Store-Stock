@@ -1,4 +1,3 @@
-DROP DATABASE IF EXISTS bamazon_db;
 CREATE DATABASE bamazon_db;
 
 USE bamazon_db;
@@ -12,4 +11,14 @@ CREATE TABLE products(
     PRIMARY KEY (product_id)
 );
 
-SELECT * FROM products
+SELECT * FROM products;
+
+INSERT INTO products(product_name, department_name, price, stock)
+VALUES ('Harry Potter and the Deathly Hallows','Books', 19.08, 553),
+        ('Lord of the Rings: The Motion Picture Trilogy - Extended Edition','Movies', 61.19, 206),
+        ('Kingdom Hearts','Video Games', 14.39, 53),
+        ('Dark Side of the Moon','CDs and Vinyl', 24.87, 78),
+        ('Eragon','Books', 10.58, 486),
+        ('Captian America: The First Avenger','Movies', 14.99, 101),
+        ('Super Smash Bros. Brawl','Video Games', 37.99, 27),
+        ('Eagles: Their Greatest Hits','CDs and Vinyl', 15.67, 67);

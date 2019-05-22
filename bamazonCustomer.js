@@ -12,7 +12,7 @@ var connection = mysql.createConnection({
 connection.connect(function(err){
     if(err) throw err;
     console.log("connected as id " + connection.threadId);
-
+    productList();
 })
 
 //This is the list of products
@@ -39,4 +39,53 @@ var productList = function(){
 
 
 //The inquirer prompt guides the user for purchasing a product by asking for the ID and the Quantity
-//function purchaseProduct()
+function purchaseProduct(){
+    inquirer.prompt([
+    {
+        name: "productID",
+        type: "input",
+        message: "Please enter the product ID of the item you want to purchase",
+        validate: function(value) {
+			if (isNaN(value) === false) {
+				return true;
+			}
+            return false;
+        },
+
+        name: "productQuantity",
+        type: "input",
+        message: "Please enter the number of the items you want to purchase",
+        validate: function(value) {
+			if (isNaN(value) === false) {
+				return true;
+			}
+            return false;
+        }
+    }
+
+    ]).then(function(answers){
+        var idSubmitted = answers.productID;
+        var quantitySubmitted = answers.productQuantity;
+        productOrder(idSubmitted, quantitySubmitted);
+    });
+};
+
+function productOrder(productID, amountRequired){
+    connection.query('SELECT * FROM products WHERE product_id ='+ productID, function(err, res){
+        if(err){console.log(err)};
+        if ( amountRequired <= res[0].stock){
+            var cost = res[0].price * amountRequired;
+            console.log("\nYour order is in stock!");
+            console.log("\nYour total cost for" 
+            + amountRequired
+            + " " + res[0].product_name
+            + "is" + cost);
+
+        }else{
+            console.log("Sorry, there is insufficient quantity of " + res[0].product_name + " to fulfill your order.")
+        };
+        productList();
+    });
+};
+
+productList();
