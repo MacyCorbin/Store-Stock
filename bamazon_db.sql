@@ -11,7 +11,7 @@ CREATE TABLE products(
     PRIMARY KEY (product_id)
 );
 
-SELECT * FROM products;
+Select * FROM products;
 
 INSERT INTO products(product_name, department_name, price, stock)
 VALUES ('Harry Potter and the Deathly Hallows','Books', 19.08, 553),
@@ -22,3 +22,5 @@ VALUES ('Harry Potter and the Deathly Hallows','Books', 19.08, 553),
         ('Captian America: The First Avenger','Movies', 14.99, 101),
         ('Super Smash Bros. Brawl','Video Games', 37.99, 27),
         ('Eagles: Their Greatest Hits','CDs and Vinyl', 15.67, 67);
+
+
